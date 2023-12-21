@@ -1,0 +1,8 @@
+.section {
+    background-color: greenyellow;
+    border: solid;
+    border-color: black;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+}
