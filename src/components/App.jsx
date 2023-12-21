@@ -9,7 +9,7 @@ export const App = () => {
 
   const [good, setGoodFeedback] = useState(0);
   const [neutral, setNeutralFeedback] = useState(0);
-  const [bad, SetBadFeedback] = useState(0);
+  const [bad, setBadFeedback] = useState(0);
 
   const countTotalFeedback = () => {
     return good + neutral + bad;
@@ -20,11 +20,11 @@ export const App = () => {
   };
 
   const leaveFeedback = () => {
-    useEffect(() => {
+    
       setGoodFeedback(prevState + 1);
       setNeutralFeedback(prevState + 1);
-      SetBadFeedback(prevState + 1);
-    }, []);
+      setBadFeedback(prevState + 1);
+   
   };
 
   return (

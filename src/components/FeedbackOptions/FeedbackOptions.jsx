@@ -18,7 +18,7 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
 
 
 FeedbackOptions.propTypes = {
-    options: PropTypes.object,
+    options: PropTypes.array,
     onLeaveFeedback: PropTypes.func
 }
 
