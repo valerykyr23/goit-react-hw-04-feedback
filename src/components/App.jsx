@@ -1,33 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Section } from './Section/Section';
 import { Statistics } from './Statistics/Statistics';
 import { Notification } from './Notification/Notification';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 
 export const App = () => {
-  
 
   const [good, setGoodFeedback] = useState(0);
   const [neutral, setNeutralFeedback] = useState(0);
   const [bad, setBadFeedback] = useState(0);
 
-  const countTotalFeedback = () => {
-    return good + neutral + bad;
-  };
+  const countTotalFeedback = () => good + neutral + bad;
 
   const countPositiveFeedbackPercentage = () => {
     return Math.round((good / countTotalFeedback()) * 100);
   };
 
-  const leaveFeedback = () => {
-    
-      setGoodFeedback(prevState + 1);
-      setNeutralFeedback(prevState + 1);
-      setBadFeedback(prevState + 1);
-   
+  const leaveFeedback = event => {
+
+    const { name } = event.target;
+
+    switch (name) {
+      case 'good':
+        setGoodFeedback(prevState => prevState + 1);
+        break;
+
+      case 'neutral':
+        setNeutralFeedback(prevState => prevState + 1);
+        break;
+      
+      case 'bad':
+        setBadFeedback(prevState => prevState + 1);
+        break;
+      
+      default:
+        console.log('default');
+    }
+
+    countTotalFeedback();
+    countPositiveFeedbackPercentage();
   };
 
   return (
+    
     <div
       style={{
         height: '100vh',
@@ -40,16 +55,16 @@ export const App = () => {
     >
       <Section title="Please leave feedback">
         <FeedbackOptions
-          options={[good, bad, neutral]}
+          options={['good', 'neutral', 'bad']}
           onLeaveFeedback={leaveFeedback}
         />
-        {countTotalFeedback ? (
+        {countTotalFeedback() ? (
           <Statistics
             good={good}
             neutral={neutral}
             bad={bad}
-            total={countTotalFeedback}
-            positivePercentage={countPositiveFeedbackPercentage}
+            total={countTotalFeedback()}
+            positivePercentage={countPositiveFeedbackPercentage()}
           />
         ) : (
           <Notification message="There is no feedback" />
